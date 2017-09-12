@@ -73,4 +73,42 @@ end
 
 class BookInStock
 # YOUR CODE HERE
+	def initialize (isbnVal, priceVal)
+		if isbnVal == '' or priceVal <=0
+			raise ArgumentError.new("ISBN should be a non empty string")
+		end
+		@isbn = isbnVal
+		@price = priceVal
+	end
+
+	def isbn
+		return @isbn
+	end
+
+	def price
+		return @price
+	end
+
+	def isbn= (isbnVal)
+		@isbn = isbnVal
+	end
+
+	def price= (price)
+		@price = price
+	end
+
+	def price_as_string
+		priceString = '$'+@price.to_s
+		decimalPointLoc = priceString.index('.')
+		if decimalPointLoc == nil
+			priceString[priceString.size] = '.'
+			decimalPointLoc = priceString.size - 1
+		end
+		for i in (1...3)
+			if priceString[decimalPointLoc+i] == nil
+				priceString[decimalPointLoc+i] = '0'
+			end
+		end
+		return priceString
+	end
 end
